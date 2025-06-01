@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+class Solution {
+    static void Main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
+        int n = int.Parse(Console.ReadLine());
+        Stack<string> s = new Stack<string>();
+        s.Push("");
+        for(int i = 0; i < n; i++){
+            var command = Console.ReadLine().Split().ToArray();
+            if(command[0] == "1"){
+                var sequence = s.Peek() + command[1];
+                s.Push(sequence);
+            } else if(command[0] == "2"){
+                var sequence = string.Join("", s.Peek().ToArray().SkipLast(int.Parse(command[1])));
+                s.Push(sequence);
+            } else if(command[0] == "3"){
+                int index = int.Parse(command[1]);
+                if(index <= s.Peek().Length){
+                    Console.WriteLine(s.Peek().ToArray().ElementAt(int.Parse(command[1]) - 1));
+                }
+            } else if(command[0] == "4"){
+                s.Pop();
+            }          
+        }
+        
+        
+    }
+}
